@@ -3,6 +3,8 @@
 require_relative "simplecov_covview/version"
 require_relative "simplecov_covview/formatter"
 require_relative "simplecov_covview/resultfile.rb"
+require_relative "simplecov_covview/srcfile.rb"
+
 module SimpleCov
   module Formatter
     class CovView
