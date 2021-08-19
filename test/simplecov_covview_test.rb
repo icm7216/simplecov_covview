@@ -25,6 +25,18 @@ class SimplecovCovviewTest < Test::Unit::TestCase
       end
     end
 
+    test "Srcfile defined" do
+      assert do
+        defined? SimplecovCovview::CovView::Srcfile
+      end
+    end
+
+    test "Line defined" do
+      assert do
+        defined? SimplecovCovview::CovView::Srcfile::Line
+      end
+    end
+
   end
 
   sub_test_case "formatter" do
@@ -54,10 +66,10 @@ class SimplecovCovviewTest < Test::Unit::TestCase
 
     # contents of @src_files_list, source code and coverage.
     data( 
-      "line number"   => [[1,       2,          3,          4,          5,        6,        7,        8,        9,        10        ], :num],
-      "status"=> [["never", "covered",  "covered",  "covered",  "never",  "missed", "never",  "never",  "never",  "covered" ], :status],
-      "coverage"   => [["-",     "1",        "10",       "10",       "-",      "0",      "-",      "-",      "-",      "11"      ], :cov],
-      "source code"   => [[ "# foo.rb\r\n", 
+      "line number" => [[1,       2,          3,          4,          5,        6,        7,        8,        9,        10        ], :num],
+      "status"      => [["never", "covered",  "covered",  "covered",  "never",  "missed", "never",  "never",  "never",  "covered" ], :status],
+      "coverage"    => [["-",     "1",        "10",       "10",       "-",      "0",      "-",      "-",      "-",      "11"      ], :cov],
+      "source code" => [[ "# foo.rb\r\n", 
                     "def foo(n)\r\n", 
                     "  if n <= 10\r\n", 
                     "    p \"n < 10\"\r\n", 
@@ -105,6 +117,39 @@ class SimplecovCovviewTest < Test::Unit::TestCase
       assert_equal(expected, actual)
     end
 
+
+    # coverage contents from @src_files_list
+    def get_contents(name)
+      contents = @src_files_list[:contents]
+      contents.map do |line|
+        row = SimplecovCovview::CovView::Srcfile::Line.new(line, @src_files_list)
+        row.send(name)
+      end
+    end
+
+    data( "line number"   => [[1,      2,        3,        4,        5,      6,       7,      8,      9,      10       ], :line_number],
+          "line width"    => [[4,      4,        4,        4,        4,      4,       4,      4,      4,      4        ], :line_width],
+          "status"        => [["never","covered","covered","covered","never","missed","never","never","never","covered"], :status],
+          "coverage count"=> [["-",    "1",      "10",     "10",     "-",    "0",     "-",    "-",    "-",    "11"     ], :cov_count],
+          "coverage width"=> [[4,      4,        4,        4,        4,      4,       4,      4,      4,      4        ], :cov_width],
+          "source code"   => [[
+            "# foo.rb\r\n", 
+            "def foo(n)\r\n", 
+            "  if n <= 10\r\n", 
+            "    p \"n < 10\"\r\n", 
+            "  else\r\n", 
+            "    p \"n >= 10\"\r\n", 
+            "  end\r\n", 
+            "end\r\n", 
+            "\r\n", 
+            "(1..10).each {|x| foo(x)}\r\n"
+          ], :source_code] )
+
+    def test_coverage_contents(data)
+      expected, target = data
+      actual = get_contents(target)
+      assert_equal(expected, actual)
+    end
 
   end
 end
