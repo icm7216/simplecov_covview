@@ -76,5 +76,36 @@ class SimplecovCovviewTest < Test::Unit::TestCase
     end
 
   end
+
+  sub_test_case "render" do
+
+    setup do
+      result_foo = {
+        source_fixture("foo.rb") => { "lines" => [nil, 1, 10, 10, nil, 0, nil, nil, nil, 11] },
+      }
+      result = SimpleCov::Result.new(result_foo)
+      covview = SimplecovCovview::CovView.new(result)
+      covview.formatter
+      @src_files_list = covview.src_files_list[0]
+      @source_file = SimplecovCovview::CovView::Srcfile.new(@src_files_list)
+    end
+
+    # coverage header from @src_files_list
+    data( "filename"    => ["foo.rb", :filename],
+          "status"  => [{:covered=>4, :missed=>1}, :status],
+          "title"   => ["line#   status   count  code", :title],
+          "header"     => [[
+            "\n----- file => foo.rb -----", 
+            "4 lines covered and 1 lines missed.", 
+            "line#   status   count  code"], :header])
+
+    def test_coverage_header(data)
+      expected, target = data
+      actual = @source_file.send(target)
+      assert_equal(expected, actual)
+    end
+
+
+  end
 end
 
