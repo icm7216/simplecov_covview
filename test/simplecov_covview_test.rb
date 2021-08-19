@@ -52,12 +52,12 @@ class SimplecovCovviewTest < Test::Unit::TestCase
       assert_equal(expected, actual)
     end
 
-    # contents of @src_files_list
+    # contents of @src_files_list, source code and coverage.
     data( 
-      "num"   => [[1,       2,          3,          4,          5,        6,        7,        8,        9,        10        ], :num],
+      "line number"   => [[1,       2,          3,          4,          5,        6,        7,        8,        9,        10        ], :num],
       "status"=> [["never", "covered",  "covered",  "covered",  "never",  "missed", "never",  "never",  "never",  "covered" ], :status],
-      "cov"   => [["-",     "1",        "10",       "10",       "-",      "0",      "-",      "-",      "-",      "11"      ], :cov],
-      "src"   => [[ "# foo.rb\r\n", 
+      "coverage"   => [["-",     "1",        "10",       "10",       "-",      "0",      "-",      "-",      "-",      "11"      ], :cov],
+      "source code"   => [[ "# foo.rb\r\n", 
                     "def foo(n)\r\n", 
                     "  if n <= 10\r\n", 
                     "    p \"n < 10\"\r\n", 
