@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["icm7216"]
   spec.email         = ["icm7216d@gmail.com"]
 
-  spec.summary       = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description   = "TODO: Write a longer description or delete this line."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Coverage viewer for simplecov."
+  spec.description   = "Coverage console output formatter for SimpleCov."
+  spec.homepage      = "https://github.com/icm7216/simplecov_covview"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
@@ -23,9 +23,5 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
-
-  # For more information and examples about making a new gem, checkout our
-  # guide at: https://bundler.io/guides/creating_gem.html
+  spec.add_development_dependency "test-unit"
 end
