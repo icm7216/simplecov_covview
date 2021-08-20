@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/simplecov_covview.svg)](https://badge.fury.io/rb/simplecov_covview)
+
 # Simplecov_covview
 
 simplecov_covview is a coverage viewer for SimpleCov.
