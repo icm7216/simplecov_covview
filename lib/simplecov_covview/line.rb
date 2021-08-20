@@ -1,11 +1,11 @@
-# Create text for each line from @src_files_list.
-#
-# @param [Hash] line @src_files_list
-# @param [Hash] src_file @src_files_list
 module SimplecovCovview
   class CovView
     class Srcfile
       class Line
+        # Create text for each line from @src_files_list.
+        #
+        # @param [Hash] line @src_files_list
+        # @param [Hash] src_file @src_files_list
         def initialize(line, src_file)
           @line = line
           @src_file = src_file

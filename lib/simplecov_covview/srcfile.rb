@@ -1,9 +1,10 @@
-# Create coverage header from @src_files_list.
-#
-# @param [Hash] src_file @src_files_list
+
 module SimplecovCovview
   class CovView
     class Srcfile
+      # Create coverage header from @src_files_list.
+      #
+      # @param [Hash] src_file @src_files_list
       def initialize(src_file)
         @src_file = src_file
       end

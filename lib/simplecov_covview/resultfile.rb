@@ -1,10 +1,10 @@
-# The Resultfile class stores source file's information.
-#
-# @param [Hash] file SimpleCov::SourceFile
+
 module SimplecovCovview
   class CovView
     class Resultfile
-
+      # The Resultfile class stores source file's information.
+      #
+      # @param [Hash] file SimpleCov::SourceFile
       def initialize(file)
         @file = file
       end
