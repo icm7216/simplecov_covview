@@ -29,11 +29,11 @@ module SimplecovCovview
 
     def render
       @src_files_list.each do |src_file|
-        source_file = SimplecovCovview::Covview::Srcfile.new(src_file)
+        source_file = SimplecovCovview::CovView::Srcfile.new(src_file)
         puts source_file.header
 
         src_file[:contents].each do |line|
-          row = SimplecovCovview::Covview::Srcfile::Line.new(line, src_file)
+          row = SimplecovCovview::CovView::Srcfile::Line.new(line, src_file)
           puts row.contents
         end
       end
