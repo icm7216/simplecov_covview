@@ -10,6 +10,8 @@ module SimpleCov
   module Formatter
     class CovView
       def format(result)
+        covview = SimplecovCovview::CovView.new(result)
+        covview.formatter.render
       end
     end
   end
