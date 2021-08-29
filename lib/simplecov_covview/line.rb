@@ -45,7 +45,7 @@ module SimplecovCovview
         end
 
         def colorize_contents
-          row = SimplecovCovview::Covview::Srcfile::Color.new(status, contents)
+          row = SimplecovCovview::CovView::Srcfile::Color.new(status, contents)
           row.colorize
         end
 
