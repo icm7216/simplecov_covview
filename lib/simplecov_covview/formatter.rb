@@ -34,7 +34,7 @@ module SimplecovCovview
 
         src_file[:contents].each do |line|
           row = SimplecovCovview::CovView::Srcfile::Line.new(line, src_file)
-          puts row.contents
+          puts row.colorize_contents
         end
       end
     end
