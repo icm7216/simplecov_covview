@@ -40,9 +40,15 @@ module SimplecovCovview
             sprintf("%#{line_width}s: ", line_number),
             sprintf("[%7s] ", status),
             sprintf("[%#{cov_width}s ] ", cov_count),
-            source_code,
+            source_code.chomp("\r\n"),
           ].join
         end
+
+        def colorize_contents
+          row = SimplecovCovview::Covview::Srcfile::Color.new(status, contents)
+          row.colorize
+        end
+
       end
     end
   end

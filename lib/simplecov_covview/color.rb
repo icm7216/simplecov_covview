@@ -1,0 +1,93 @@
+module SimplecovCovview
+  require 'rainbow/refinement'
+
+  class CovView
+    class Srcfile
+      class Color
+        using Rainbow
+
+        # 8 colors colorscheme
+        COLOR_8 = {
+          covered: {
+            color: :green, 
+            background: :default
+          },
+          missed: {
+            color: :red, 
+            background: :default
+          },
+        }
+
+        # 256 colors colorscheme
+        COLOR_256 = {
+          covered: {
+            color: :black, 
+            background: :lightgreen
+          },
+          missed: {
+            color: :black, 
+            background: :lightpink
+          },
+        }
+
+        # Colorize the source file detail view
+        # 
+        # @param [Array] status @src_files_line
+        # @param [Array] contents @src_files_line
+        def initialize(status, contents)
+          @status = status
+          @contents = contents
+          @colorscheme = {}
+          set_colorscheme
+        end
+
+
+        def use_colors?
+          SimpleCov::Formatter::CovView.use_color ||= false
+        end
+
+        def use_256colors?
+          SimpleCov::Formatter::CovView.use_256color ||= false
+        end
+
+
+        def set_colorscheme
+          @colorscheme = COLOR_8 if use_colors?
+          @colorscheme = COLOR_256 if use_256colors?
+        end
+
+        def covered_color
+          color = @colorscheme[:covered][:color]
+        end
+
+        def covered_background
+          color = @colorscheme[:covered][:background]
+        end
+
+        def missed_color
+          color = @colorscheme[:missed][:color]
+        end
+
+        def missed_background
+          color = @colorscheme[:missed][:background]
+        end
+
+        def colorize
+          return @contents unless (use_colors? || use_256colors?)
+
+          case @status
+          when "covered"
+            out_str = Rainbow(@contents).color(covered_color).bg(covered_background)
+          when "missed"
+            out_str = Rainbow(@contents).color(missed_color).bg(missed_background)
+          else
+            out_str = @contents
+          end
+
+          out_str
+        end
+
+      end
+    end
+  end
+end
