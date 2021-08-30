@@ -37,6 +37,12 @@ class SimplecovCovviewTest < Test::Unit::TestCase
       end
     end
 
+    test "Color defined" do
+      assert do
+        defined? SimplecovCovview::CovView::Srcfile::Color
+      end
+    end
+
   end
 
   sub_test_case "formatter" do
@@ -151,6 +157,58 @@ class SimplecovCovviewTest < Test::Unit::TestCase
       assert_equal(expected, actual)
     end
 
+  end
+
+  sub_test_case "8-colors" do
+    setup do
+      status = "covered"
+      contents = ["foo"]
+      SimpleCov::Formatter::CovView.use_8color = true
+      SimpleCov::Formatter::CovView.use_256color = false
+      @color_text = SimplecovCovview::CovView::Srcfile::Color.new(status, contents)
+    end
+
+    data( 
+      "use_8colors?"        => [true, :use_8colors?],
+      "use_256colors?"      => [false, :use_256colors?],
+      "covered_color"       => [:white, :covered_color],
+      "covered_background"  => [:green, :covered_background],
+      "missed_color"        => [:white, :missed_color],
+      "missed_background"   => [:red, :missed_background],
+      "colorize"            => ["\e[37m\e[42m[\"foo\"]\e[0m", :colorize]
+    )
+
+    def test_8colors(data)
+      expected, target = data
+      actual = @color_text.send(target)
+      assert_equal(expected, actual)
+    end  
+  end
+
+  sub_test_case "256-colors" do
+    setup do
+      status = "covered"
+      contents = ["foo"]
+      SimpleCov::Formatter::CovView.use_8color = false
+      SimpleCov::Formatter::CovView.use_256color = true
+      @color_text = SimplecovCovview::CovView::Srcfile::Color.new(status, contents)
+    end
+
+    data( 
+      "use_8colors?"        => [false, :use_8colors?],
+      "use_256colors?"      => [true, :use_256colors?],
+      "covered_color"       => [:black, :covered_color],
+      "covered_background"  => [:lightgreen, :covered_background],
+      "missed_color"        => [:black, :missed_color],
+      "missed_background"   => [:lightpink, :missed_background],
+      "colorize"            => ["\e[30m\e[48;5;157m[\"foo\"]\e[0m", :colorize]
+    )
+
+    def test_256colors(data)
+      expected, target = data
+      actual = @color_text.send(target)
+      assert_equal(expected, actual)
+    end  
   end
 end
 
