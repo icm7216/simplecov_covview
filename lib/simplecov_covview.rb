@@ -12,7 +12,7 @@ module SimpleCov
     class CovView
       
       class << self
-        attr_accessor :use_color
+        attr_accessor :use_8color
         attr_accessor :use_256color
       end
 

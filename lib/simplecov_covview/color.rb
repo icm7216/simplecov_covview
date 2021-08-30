@@ -42,8 +42,8 @@ module SimplecovCovview
         end
 
 
-        def use_colors?
-          SimpleCov::Formatter::CovView.use_color ||= false
+        def use_8colors?
+          SimpleCov::Formatter::CovView.use_8color ||= false
         end
 
         def use_256colors?
@@ -52,7 +52,7 @@ module SimplecovCovview
 
 
         def set_colorscheme
-          @colorscheme = COLOR_8 if use_colors?
+          @colorscheme = COLOR_8 if use_8colors?
           @colorscheme = COLOR_256 if use_256colors?
         end
 
@@ -73,7 +73,7 @@ module SimplecovCovview
         end
 
         def colorize
-          return @contents unless (use_colors? || use_256colors?)
+          return @contents unless (use_8colors? || use_256colors?)
 
           case @status
           when "covered"
