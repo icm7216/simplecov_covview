@@ -9,12 +9,12 @@ module SimplecovCovview
         # 8 colors colorscheme
         COLOR_8 = {
           covered: {
-            color: :green, 
-            background: :default
+            color: :white, 
+            background: :green
           },
           missed: {
-            color: :red, 
-            background: :default
+            color: :white, 
+            background: :red
           },
         }
 
