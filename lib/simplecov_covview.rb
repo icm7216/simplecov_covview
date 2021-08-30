@@ -16,6 +16,8 @@ module SimpleCov
         attr_accessor :use_256color
       end
 
+      SimpleCov::Formatter::CovView.use_8color = true
+
       def format(result)
         covview = SimplecovCovview::CovView.new(result)
         covview.formatter.render
