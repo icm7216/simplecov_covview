@@ -57,19 +57,19 @@ module SimplecovCovview
         end
 
         def covered_color
-          color = @colorscheme[:covered][:color]
+          @colorscheme[:covered][:color]
         end
 
         def covered_background
-          color = @colorscheme[:covered][:background]
+          @colorscheme[:covered][:background]
         end
 
         def missed_color
-          color = @colorscheme[:missed][:color]
+          @colorscheme[:missed][:color]
         end
 
         def missed_background
-          color = @colorscheme[:missed][:background]
+          @colorscheme[:missed][:background]
         end
 
         def colorize
