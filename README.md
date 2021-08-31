@@ -26,6 +26,9 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+require "simplecov"
+require "simplecov_covview"
+
 SimpleCov.formatter = SimpleCov::Formatter::CovView
 # or
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -34,24 +37,39 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   ])
 ```
 
-Example output:
+## Output options:
 
-```text
+### 8-colors colorized output (default)
+*  The default color mode is 8-colors mode.
+*  To enable 8-colors, enable `use_8color` and disable `use_256color`.
 
------ file => foo.rb -----
-4 lines covered and 1 lines missed.
-line#   status   count  code
-   1: [  never] [   - ] # foo.rb
-   2: [covered] [   1 ] def foo(n)
-   3: [covered] [  10 ]   if n <= 10
-   4: [covered] [  10 ]     p "n < 10"
-   5: [  never] [   - ]   else
-   6: [ missed] [   0 ]     p "n >= 10"
-   7: [  never] [   - ]   end
-   8: [  never] [   - ] end
-   9: [  never] [   - ]
-  10: [covered] [  11 ] (1..10).each {|x| foo(x)}
+```ruby
+SimpleCov::Formatter::CovView.use_8color = true
+SimpleCov::Formatter::CovView.use_256color = false
 ```
+![8 colors](img/color-8.png "Example output 8-colors")
+
+
+### 256-colors colorized output 
+*  To enable 256-colors mode, enable `use_256color`.
+* `use_256color` has priority over `use_8color`.
+```ruby
+SimpleCov::Formatter::CovView.use_8color = false
+SimpleCov::Formatter::CovView.use_256color = true
+# or
+SimpleCov::Formatter::CovView.use_8color = true
+SimpleCov::Formatter::CovView.use_256color = true
+```
+![256 colors](img/color-256.png "Example output 256-colors")
+
+### No colorized output
+Disabling 8-colors and 256-colors will result in no colorization.　　
+```ruby
+SimpleCov::Formatter::CovView.use_8color = false
+SimpleCov::Formatter::CovView.use_256color = false
+```
+
+![no colors](img/color-no.png "Example output no-colors")
 
 ## Contributing
 
