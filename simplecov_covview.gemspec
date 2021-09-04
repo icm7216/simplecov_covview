@@ -23,6 +23,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "simplecov"
+  spec.add_runtime_dependency "rainbow"
+
   spec.add_development_dependency "test-unit"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "rainbow"
